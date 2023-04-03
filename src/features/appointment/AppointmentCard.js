@@ -5,6 +5,7 @@ const AppointmentCard = ({ appointment }) => {
     const { type, name, title, description, date } = appointment;
 
     return (
+        
         <Card>
             <CardContent>
                 <Typography variant='h5'>
