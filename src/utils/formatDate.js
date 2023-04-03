@@ -4,4 +4,4 @@ export const formatDate = (date) => {
         month: 'short',
         day: '2-digit'
     }).format(new Date(Date.parse(date)));
-}
+};

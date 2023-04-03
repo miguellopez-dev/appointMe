@@ -7,10 +7,10 @@ const AppointmentCard = ({ appointment }) => {
     return (
         <Card>
             <CardContent>
-                <Typography variant='h5' gutterBottom>
+                <Typography variant='h5'>
                     {title} - {type}
                 </Typography>
-                <Typography sx={{ fontSize: 14 }} color='text.secondary'>
+                <Typography xs={{ fontSize: 14 }} color='text.secondary' gutterBottom>
                     {formatDate(date)} - {name}
                 </Typography>
                 <Typography variant='body2'>
@@ -18,5 +18,7 @@ const AppointmentCard = ({ appointment }) => {
                 </Typography>
             </CardContent>
         </Card>
-    )
+    );
 }
+
+export default AppointmentCard;
