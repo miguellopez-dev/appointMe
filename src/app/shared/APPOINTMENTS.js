@@ -1,7 +1,7 @@
 export const APPOINTMENTS = [
     {
         id: 0,
-        type: 'Doctor',
+        type: 'Sam',
         name: 'Dr. Peterson',
         title: 'Physical',
         description: 'Yearly Physical with Dr. Peterson.',
