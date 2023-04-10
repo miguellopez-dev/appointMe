@@ -2,10 +2,12 @@ import { Button, ButtonGroup, Card, CardContent, CardActions, Typography, Paper 
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import { formatDate } from "../../utils/formatDate";
-import { removeSelectedAppointment } from "./AppointmentSlice";
+import { useDispatch } from "react-redux";
+import { deleteAppointment } from "./AppointmentSlice";
 
 const AppointmentCard = ({ appointment }) => {
     const { id, type, name, title, description, date } = appointment;
+    const dispatch = useDispatch();
 
     return (
         <Paper elevation={5}>
@@ -23,7 +25,7 @@ const AppointmentCard = ({ appointment }) => {
                 </CardContent>
                 <CardActions>
                     <ButtonGroup variant='outlined' size='small' aria-label='small button group'>
-                        <Button color='error' onClick={(e) => removeSelectedAppointment(id)}>
+                        <Button color='error' onClick={() => dispatch(deleteAppointment(id))}>
                             <DeleteOutlineOutlinedIcon />
                         </Button>
                         <Button color='success'>

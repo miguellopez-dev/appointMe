@@ -1,9 +1,10 @@
 import { Grid, Item } from "@mui/material";
-import { selectAllApointments } from "./AppointmentSlice";
 import AppointmentCard from "./AppointmentCard";
+import { selectAllApointments } from "./AppointmentSlice";
+import { useSelector } from "react-redux";
 
 const AppointmentList = () => {
-    const appointments = selectAllApointments();
+    const appointments = useSelector(selectAllApointments);
 
     return (
         <Grid container spacing={4}>
