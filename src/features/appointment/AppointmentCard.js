@@ -1,9 +1,9 @@
-import { Button, ButtonGroup, Card, CardContent, CardActions, Typography, Paper } from "@mui/material";
+import { IconButton, Card, CardContent, CardActions, Typography, Paper, Stack } from "@mui/material";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import { formatDate } from "../../utils/formatDate";
 import { useDispatch } from "react-redux";
 import { deleteAppointment } from "./AppointmentSlice";
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 const AppointmentCard = ({ appointment }) => {
     const { id, type, name, title, description, date } = appointment;
@@ -23,15 +23,15 @@ const AppointmentCard = ({ appointment }) => {
                         {description}
                     </Typography>
                 </CardContent>
-                <CardActions>
-                    <ButtonGroup variant='outlined' size='small' aria-label='small button group'>
-                        <Button color='error' onClick={() => dispatch(deleteAppointment(id))}>
+                <CardActions alignItems='center'>
+                    <Stack spacing={1} direction='row' alignItems='center'>
+                        <IconButton aria-label='delete' color='error' size='small' onClick={() => dispatch(deleteAppointment(id))}>
                             <DeleteOutlineOutlinedIcon />
-                        </Button>
-                        <Button color='success'>
-                            <CreateOutlinedIcon />
-                        </Button>
-                    </ButtonGroup>
+                        </IconButton>
+                        <IconButton aria-label='edit' color='success'>
+                            <EditOutlinedIcon />
+                        </IconButton>
+                    </Stack>
                 </CardActions>
             </Card>
         </Paper>
