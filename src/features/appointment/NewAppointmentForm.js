@@ -3,8 +3,12 @@ import { DateTimePicker } from '@mui/x-date-pickers';
 import { TextField, Fab, styled, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addAppointment } from './AppointmentSlice';
 
 const NewAppointmentForm = () => {
+    const dispatch = useDispatch();
+
     const StyledFab = styled(Fab)({
         position: 'fixed',
         zIndex: 1,
@@ -18,10 +22,32 @@ const NewAppointmentForm = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const { control, register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const [data, setData] = useState(null);
 
-    console.log(watch('example'));
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            type: '',
+            name: '',
+            title: '',
+            description: '',
+            date: ''
+        }
+    });
+    const onSubmit = (values) => {
+        const appointment = {
+            type: values.type,
+            name: values.name,
+            title: values.title,
+            description: values.description,
+            date: values.date.toJSON()
+        };
+        console.log(appointment);
+        dispatch(addAppointment(appointment));
+        handleClose();
+    }
+
+
+
 
     return (
         <>
@@ -33,39 +59,41 @@ const NewAppointmentForm = () => {
                 <DialogContent>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <Controller
-                            name='Appointment'
+                            name='title'
                             control={control}
                             rules={{ required: true }}
                             render={({ field }) => <TextField {...field} label='Appointment Name' fullWidth margin='normal' />}
                         />
                         <Controller
-                            name='Type'
+                            name='type'
                             control={control}
                             render={({ field }) => <TextField {...field} label='Type of Appointment' fullWidth margin='normal' />}
                         />
                         <Controller
-                            name='Apoointment With'
+                            name='name'
                             control={control}
                             render={({ field }) => <TextField {...field} label='Appointment With' fullWidth margin='normal' />}
                         />
                         <Controller
-                            name='Date and Time'
+                            name='date'
                             control={control}
                             rules={{ required: true }}
-                            render={({ field }) => <DateTimePicker {...field} label='Date and Time' sx={{width: '100%', marginTop: 2, marginBottom: 1}}  />}
+                            render={({ field: { ref, ...rest } }) => <DateTimePicker {...rest} label='Date and Time' sx={{ width: '100%', marginTop: 2, marginBottom: 1 }} />}
 
                         />
                         <Controller
-                            name='Description'
+                            name='description'
                             control={control}
                             render={({ field }) => <TextField {...field} label='Description' fullWidth margin='normal' multiline rows={4} />}
                         />
+
+
+                        <DialogActions>
+                            <Button onClick={handleClose}>Cancel</Button>
+                            <Button type='submit'>Submit</Button>
+                        </DialogActions>
                     </form>
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button type='submit'>Submit</Button>
-                </DialogActions>
             </Dialog>
         </>
     );
