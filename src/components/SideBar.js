@@ -1,18 +1,9 @@
-import { useState } from "react";
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography, Container } from "@mui/material";
+import UserLoginForm from '../features/user/UserLoginForm';
 
-const settings = ['Profile', 'Logout'];
+
 
 const ResponsiveAppBar = () => {
-    const [anchorElUser, setAnchorElUser] = useState(null);
-
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
 
     return (
         <AppBar position='static' sx={{ bgcolor: 'secondary.main', marginBottom: 5 }}>
@@ -56,33 +47,7 @@ const ResponsiveAppBar = () => {
                     </Typography>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title='Open settings'>
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt='Profile Icon' src='../app/assets/imgs/profile-icon.png' />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id='menu-appbar'
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right'
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right'
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign='center'>{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
+                        <UserLoginForm />
                     </Box>
                 </Toolbar>
             </Container>
