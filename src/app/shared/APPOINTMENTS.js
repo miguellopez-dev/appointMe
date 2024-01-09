@@ -36,7 +36,7 @@ export const APPOINTMENTS = [
         type: 'Psychiatrist',
         name: 'Mrs. Riem',
         title: 'Monthly Checkup',
-        description: 'Montly checkup with Mrs. Riem for mental health.',
+        description: 'Monthly checkup with Mrs. Riem for mental health.',
         date: '2023-05-10T16:00'
     }
 ];
